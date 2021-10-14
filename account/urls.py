@@ -1,6 +1,6 @@
 from django.urls import path
 
-from users.views import (
+from account.views import (
     register, users
 )
 
