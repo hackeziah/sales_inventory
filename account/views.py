@@ -2,8 +2,8 @@ from rest_framework import exceptions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from users.models import User
-from users.serializers import UserSerializers
+from account.models import Account
+from account.serializers import UserSerializers
 
 
 # Create your views here.
@@ -24,7 +24,7 @@ def login(request):
     email = request.data.get('email')
     pasword = request.data.get('password')
 
-    user = User.objects.filter(email=email).first()
+    user = Account.objects.filter(email=email).first()
 
     if user is None:
         raise exceptions.AuthenticationFailed("User not Found")
@@ -36,6 +36,6 @@ def login(request):
 
 @api_view(['GET'])
 def users(request):
-    users = User.objects.all()
+    users = Account.objects.all()
     serializer = UserSerializers(users, many=True)
     return Response(serializer.data)
